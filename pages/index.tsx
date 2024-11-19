@@ -6,7 +6,15 @@ export default function Home() {
       <Head>
         <title>Phoenix Nation</title>
       </Head>
-      <div>karim selim</div>
+      <p className="view">karim selim</p>
+      <p>karim selim</p>
+      <p>karim selim</p>
+      <p>karim selim</p>
+      <h3 className="view">karim selim</h3>
+      <p>karim selim</p>
+      <p>karim selim</p>
+      <p>karim selim</p>
+      <p>karim selim</p>
     </>
   );
 }
