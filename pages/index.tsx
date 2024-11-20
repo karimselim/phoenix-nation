@@ -1,3 +1,4 @@
+import Loader from '@/components/loader/Loader';
 import Head from 'next/head';
 
 export default function Home() {
@@ -6,15 +7,7 @@ export default function Home() {
       <Head>
         <title>Phoenix Nation</title>
       </Head>
-      <p className="view">karim selim</p>
-      <p>karim selim</p>
-      <p>karim selim</p>
-      <p>karim selim</p>
-      <h3 className="view">karim selim</h3>
-      <p>karim selim</p>
-      <p>karim selim</p>
-      <p>karim selim</p>
-      <p>karim selim</p>
+      <Loader />
     </>
   );
 }
