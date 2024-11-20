@@ -15,7 +15,7 @@ const Cursor = () => {
     const onMouseEnterLink = (event: Event) => {
       const element = event.target as HTMLElement;
       if (element.classList.contains('view')) {
-        gsap.to(cursor, { scale: 4 });
+        gsap.to(cursor, { scale: 6 });
         if (cursorText) {
           cursorText.style.display = 'block';
         }
