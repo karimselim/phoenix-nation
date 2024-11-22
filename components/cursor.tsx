@@ -4,7 +4,6 @@ import gsap from 'gsap';
 const Cursor = () => {
   useEffect(() => {
     const cursor = document.getElementById('custom-cursor');
-    const elementsWithViewClass = document.querySelectorAll('.view'); // Select elements with class 'view'
     const cursorText = document.getElementById('cursor-text');
 
     const onMouseMove = (event: MouseEvent) => {
@@ -29,16 +28,43 @@ const Cursor = () => {
       }
     };
 
-    // Add event listeners to elements with the class 'view'
-    elementsWithViewClass.forEach((element) => {
-      element.addEventListener('mouseenter', onMouseEnterLink as EventListener);
-      element.addEventListener('mouseleave', onMouseLeaveLink as EventListener);
+    const addEventListenersToViewElements = () => {
+      const elementsWithViewClass = document.querySelectorAll('.view');
+      elementsWithViewClass.forEach((element) => {
+        if (!element.hasAttribute('data-cursor-bound')) {
+          element.addEventListener(
+            'mouseenter',
+            onMouseEnterLink as EventListener
+          );
+          element.addEventListener(
+            'mouseleave',
+            onMouseLeaveLink as EventListener
+          );
+          element.setAttribute('data-cursor-bound', 'true'); // Mark as processed
+        }
+      });
+    };
+
+    // Set up MutationObserver to watch for changes in the DOM
+    const observer = new MutationObserver(() => {
+      addEventListenersToViewElements();
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
     });
 
     document.addEventListener('mousemove', onMouseMove);
 
-    // Clean up event listeners on component unmount
+    // Initial setup
+    addEventListenersToViewElements();
+
+    // Clean up event listeners and observer on unmount
     return () => {
+      observer.disconnect();
+      document.removeEventListener('mousemove', onMouseMove);
+      const elementsWithViewClass = document.querySelectorAll('.view');
       elementsWithViewClass.forEach((element) => {
         element.removeEventListener(
           'mouseenter',
@@ -49,7 +75,6 @@ const Cursor = () => {
           onMouseLeaveLink as EventListener
         );
       });
-      document.removeEventListener('mousemove', onMouseMove);
     };
   }, []);
 

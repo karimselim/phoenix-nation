@@ -28,3 +28,12 @@ body {
 .phoenixImgs img {
   clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
 }
+
+.pre-loader,
+.counter {
+  font-family: 'Timmons NY';
+}
+
+.pre-loader {
+  clip-path: polygon(0 0, 100% 0%, 100% 100px, 0 100px);
+}
